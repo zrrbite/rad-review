@@ -282,12 +282,12 @@ attempts count normally.
 | Config | Default |
 |---|---|
 | `TUTOR_MODEL` | `claude-sonnet-5-5` |
-| Max tokens per reply | 400 |
+| Max tokens per reply | 1024 (see section 15) |
 | `TUTOR_MONTHLY_CAP_USD` | 10 |
 | `TUTOR_PRICE_INPUT_PER_MTOK` | 2 |
 | `TUTOR_PRICE_OUTPUT_PER_MTOK` | 10 |
 
-- The system prompt is cached with prompt caching.
+- Prompt caching covers the tools, the system prompt and the conversation so far.
 - Each assistant message stores its usage: input, output, cache-write and
   cache-read tokens.
 - Monthly spend is computed from that usage and the configured prices. Cache
@@ -465,3 +465,27 @@ Written test-first.
   - an Anthropic API key, with a spend limit set in the console
 - **Repo hosting.** Local git now; whether to push to a private GitHub repo is
   the parent's call.
+
+## 15. Changes made while planning (2026-10-13)
+
+Found while writing and checking the implementation plan
+(`docs/superpowers/plans/2026-10-13-math-review.md`):
+
+- **Tutor reply limit is 1024 tokens, not 400.** Sonnet 5.5 thinks adaptively
+  even at low effort, and thinking counts toward the limit. Reply length is held
+  by the prompt (about 100 words) and cost by the monthly cap. The tutor runs at
+  `effort: low` and sends no `temperature`, which Sonnet 5.5 rejects.
+- **No server-side refusal fallback.** The API's `fallbacks` option only retries
+  `cyber` and `frontier_llm` declines, which a math tutor won't hit. A refusal
+  shows the worked solution, like any other tutor failure.
+- **Extra columns.**
+  - `sessions` holds the problem in progress and the feedback being shown
+    (`target_count`, `picked_count`, `phase`, `current_json`, `feedback_json`,
+    `retry_pending`), so reloads and double submits can't skip or repeat
+    anything, and answers never reach the browser early.
+  - `tutor_conversations` keeps `api_messages_json`, the exact messages sent to
+    the API, because thinking and tool blocks must be passed back unchanged.
+- **`1:50` is read as 50**, so målestok answers can be typed the way they're
+  written.
+- **A tutor conversation only opens while that answer's feedback is on screen.**
+  This makes "the tutor never sees the next problem" hold even for an old tab.
