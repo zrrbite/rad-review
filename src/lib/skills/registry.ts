@@ -2,10 +2,14 @@
 
 import { createRng } from '../rng';
 import { fractionAddSub } from './fraction-add-sub';
+import { fractionDecimalPercent } from './fraction-decimal-percent';
 import { fractionMulDiv } from './fraction-mul-div';
 import { fractionSimplify } from './fraction-simplify';
 import { negativeNumbers } from './negative-numbers';
 import { orderOfOperations } from './order-of-operations';
+import { percentChange } from './percent-change';
+import { percentOf } from './percent-of';
+import { percentWhat } from './percent-what';
 import type { SkillId } from './curriculum';
 import type { Level, Problem, SkillGenerator } from './types';
 
@@ -14,7 +18,11 @@ const GENERATORS: SkillGenerator[] = [
 	negativeNumbers,
 	fractionSimplify,
 	fractionAddSub,
-	fractionMulDiv
+	fractionMulDiv,
+	fractionDecimalPercent,
+	percentOf,
+	percentWhat,
+	percentChange
 ];
 
 const BY_ID = new Map<SkillId, SkillGenerator>(GENERATORS.map((g) => [g.id, g]));
