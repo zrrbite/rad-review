@@ -1,6 +1,7 @@
 // Skill id → generator. Each generator task adds its import and one entry.
 
 import { createRng } from '../rng';
+import { boxVolume } from './box-volume';
 import { circle } from './circle';
 import { formulaSubstitution } from './formula-substitution';
 import { fractionAddSub } from './fraction-add-sub';
@@ -15,9 +16,11 @@ import { percentChange } from './percent-change';
 import { percentOf } from './percent-of';
 import { percentWhat } from './percent-what';
 import { perimeterArea } from './perimeter-area';
+import { scale } from './scale';
 import { simplifyExpression } from './simplify-expression';
 import { slopeIntercept } from './slope-intercept';
 import { triangleAngles } from './triangle-angles';
+import { unitConversion } from './unit-conversion';
 import type { SkillId } from './curriculum';
 import type { Level, Problem, SkillGenerator } from './types';
 
@@ -38,7 +41,10 @@ const GENERATORS: SkillGenerator[] = [
 	slopeIntercept,
 	triangleAngles,
 	perimeterArea,
-	circle
+	circle,
+	boxVolume,
+	scale,
+	unitConversion
 ];
 
 const BY_ID = new Map<SkillId, SkillGenerator>(GENERATORS.map((g) => [g.id, g]));
