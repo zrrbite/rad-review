@@ -2,6 +2,7 @@
 	import { enhance } from '$app/forms';
 	import { ignoreHastyEnter } from '$lib/actions';
 	import ProblemCard from '$lib/components/ProblemCard.svelte';
+	import TutorPanel from '$lib/components/TutorPanel.svelte';
 	import type { PageProps } from './$types';
 
 	let { data, form }: PageProps = $props();
@@ -53,6 +54,11 @@
 					</p>
 				{/if}
 			</div>
+			{#if view.feedback.tutorAllowed}
+				{#key view.feedback.attemptId}
+					<TutorPanel attemptId={view.feedback.attemptId} />
+				{/key}
+			{/if}
 			<form method="POST" action="?/next" use:enhance>
 				<!-- svelte-ignore a11y_autofocus -->
 				<button class="primary" type="submit" autofocus use:ignoreHastyEnter>{view.feedback.nextLabel}</button>
