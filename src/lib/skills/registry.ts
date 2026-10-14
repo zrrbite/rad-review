@@ -1,10 +1,15 @@
 // Skill id → generator. Each generator task adds its import and one entry.
 
 import { createRng } from '../rng';
+import { negativeNumbers } from './negative-numbers';
+import { orderOfOperations } from './order-of-operations';
 import type { SkillId } from './curriculum';
 import type { Level, Problem, SkillGenerator } from './types';
 
-const GENERATORS: SkillGenerator[] = [];
+const GENERATORS: SkillGenerator[] = [
+	orderOfOperations,
+	negativeNumbers
+];
 
 const BY_ID = new Map<SkillId, SkillGenerator>(GENERATORS.map((g) => [g.id, g]));
 
