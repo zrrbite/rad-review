@@ -1,0 +1,31 @@
+# Fly.io config. `app` and ORIGIN must match the app name `fly apps create` gave you.
+app = "rad-review"
+primary_region = "arn"
+
+[env]
+  ORIGIN = "https://rad-review.fly.dev"
+  ADDRESS_HEADER = "Fly-Client-IP"
+  DATABASE_PATH = "/data/rad-review.db"
+  TZ = "Europe/Copenhagen"
+
+[[mounts]]
+  source = "data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    path = "/health"
+    timeout = "5s"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
