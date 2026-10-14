@@ -26,3 +26,11 @@ export interface SkillMapTopic {
 	name: string;
 	skills: SkillMapSkill[];
 }
+
+export interface TrendPoint {
+	/** Copenhagen date, "2026-10-13". */
+	date: string;
+	/** "13. okt." */
+	label: string;
+	weak: number;
+}

@@ -318,3 +318,90 @@ form.answer input {
 .status-progressing { --status: var(--progressing); }
 .status-solid { --status: var(--solid); }
 .status-due { --status: var(--due); }
+
+.stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+	gap: 0.6rem;
+	margin: 1rem 0;
+}
+
+.stat {
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	padding: 0.6rem 0.8rem;
+}
+
+.stat strong {
+	display: block;
+	font-size: 1.5rem;
+}
+
+.stat[class*='status-'] {
+	border-left: 5px solid var(--status);
+}
+
+.trend {
+	margin: 1rem 0;
+}
+
+.trend svg {
+	width: 100%;
+	height: auto;
+	display: block;
+	touch-action: pan-y;
+}
+
+.trend .line {
+	fill: none;
+	stroke: var(--accent);
+	stroke-width: 2;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+}
+
+.trend .baseline {
+	stroke: var(--line);
+}
+
+.trend .crosshair {
+	stroke: var(--muted);
+	stroke-width: 1;
+}
+
+.trend .dot {
+	fill: var(--accent);
+	stroke: var(--surface);
+	stroke-width: 2;
+}
+
+.trend .axis {
+	fill: var(--muted);
+	font-size: 10px;
+}
+
+.trend .readout {
+	margin: 0.25rem 0;
+	color: var(--muted);
+}
+
+.history li,
+.conversations li {
+	list-style: none;
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	padding: 0.6rem 0.8rem;
+	margin: 0.5rem 0;
+}
+
+.history ul,
+.conversations ul {
+	padding: 0;
+}
+
+.flag {
+	color: var(--wrong-line);
+	font-weight: 600;
+}
