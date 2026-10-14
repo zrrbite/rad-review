@@ -1,0 +1,10 @@
+node_modules/
+.svelte-kit/
+build/
+.env
+data/
+*.db
+*.db-wal
+*.db-shm
+test-results/
+playwright-report/
