@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { registeredSkills } from './registry';
 import { interleavedOrder, SKILL_IDS, SKILL_NAMES, TOPICS, topicOf } from './curriculum';
 
 describe('curriculum', () => {
@@ -20,5 +21,9 @@ describe('curriculum', () => {
 			expect(topicOf(order[i]).id, `${order[i - 1]} → ${order[i]}`).not.toBe(topicOf(order[i - 1]).id);
 		}
 		expect(order.slice(0, TOPICS.length)).toEqual(TOPICS.map((t) => t.skills[0]));
+	});
+
+	it('has a generator for every skill', () => {
+		expect([...registeredSkills()].sort()).toEqual([...SKILL_IDS].sort());
 	});
 });
