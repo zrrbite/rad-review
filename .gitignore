@@ -8,3 +8,4 @@ data/
 *.db-shm
 test-results/
 playwright-report/
+.e2e-data/
